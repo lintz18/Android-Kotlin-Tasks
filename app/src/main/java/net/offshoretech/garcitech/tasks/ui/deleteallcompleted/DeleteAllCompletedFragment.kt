@@ -1,0 +1,26 @@
+package net.offshoretech.garcitech.tasks.ui.deleteallcompleted
+
+import android.app.Dialog
+import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class DeleteAllCompletedFragment: DialogFragment() {
+
+    private val viewModel: DeleteAllCompletedViewModel by viewModels()
+
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
+        AlertDialog.Builder(requireContext())
+            .setTitle("Confirmar eliminació")
+            .setMessage("Estàs segur que desitjas eliminar totes les tasques completades?")
+            .setNegativeButton("Cancela", null)
+            .setPositiveButton("Eliminar") {_,_ ->
+                viewModel.onConfirmClick()
+            }
+            .create()
+
+}
